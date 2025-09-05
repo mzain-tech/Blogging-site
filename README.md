@@ -4,6 +4,26 @@
 This is a feature-rich blogging web application built with the Django framework.  
 It allows users to create, manage, and share blog posts, organize them into categories, and interact through comments.  
 
+## 📸 Screenshots
+
+### 1️⃣ Admin Dashboard in Website
+![Admin Dashboard](assets/admin_dashboard.png)
+
+### 2️⃣ Admin
+![Admin](assets/admin.png)
+
+### 3️⃣ Home Page
+![Home Page](assets/home_page.png)
+
+### 4️⃣ Login Page
+![Login Page](assets/login_page.png)
+
+### 5️⃣ Registration Page
+![Registration Page](assets/registration_page.png)
+
+### 6️⃣ Analytics
+![Analytics](assets/analytics.png)
+
 ## ⚙️ Prerequisites
 - Python 3.9 or higher  
 - Django (latest stable release recommended)  
