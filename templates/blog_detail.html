@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="post-card">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-content">{{ post.content }}</p>
+    </div>
+
+    <div class="comments-section">
+        <h3>💬 Comments ({{ comments.count }})</h3>
+
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment-card">
+                    <div class="comment-header">
+                        <b class="username">{{ comment.user.username }}</b>
+                        <span class="comment-date">{{ comment.created_at|date:"M d, Y H:i" }}</span>
+                    </div>
+                    <p class="comment-text">{{ comment.content }}</p>
+
+                    {% if request.user.is_superuser or request.user == comment.user %}
+                        <form method="post" action="{% url 'del_comment' comment.id %}" class="delete-form">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn">🗑 Delete</button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-comments">No comments yet.</p>
+        {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+        <div class="add-comment">
+            <h3>➕ Add a Comment</h3>
+            <form method="post">
+                {% csrf_token %}
+                <textarea name="content" placeholder="Write your comment..." required></textarea><br>
+                <button type="submit" class="add-btn">Post Comment</button>
+            </form>
+        </div>
+    {% else %}
+        <p class="login-message"><a href="{% url 'user_login' %}">Login</a> to comment</p>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="card">Total Users <span>{{ total_users }}</span></div>
+        <div class="card">Total Blogs <span>{{ total_blogs }}</span></div>
+        <div class="card">Published Blogs <span>{{ published_blogs }}</span></div>
+        <div class="card">Pending Blogs <span>{{ pending_blogs }}</span></div>
+    </div>
+
+    <!-- Users Table -->
+    <h2>Users</h2>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% if user.is_active %}
+                        <span class="status active">Active</span>
+                    {% else %}
+                        <span class="status blocked">Blocked</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.is_active %}
+                        <a class="btn btn-block" href="{% url 'block_user' user.id %}">Block</a>
+                    {% else %}
+                        <a class="btn btn-unblock" href="{% url 'unblock_user' user.id %}">Unblock</a>
+                    {% endif %}
+                        <a class='btn btn-delete' href="{% url 'del_user' user.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Add Blog Button -->
+
+    <!-- Admin's Own Blogs -->
+    <h2>My Blogs</h2>
+    <a class="btn btn-add-blog" href="{% url 'add_blog' %}">Add Blog</a><br><br>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for blog in blogs %}
+                {% if blog.author == request.user %}
+                <tr>
+                    <td>{{ blog.id }}</td>
+                    <td>{{ blog.title }}</td>
+                    <td>
+                        <span class="status {{ blog.status }}">{{ blog.status|title }}</span>
+                    </td>
+                    <td>
+                        <a class="btn btn-edit" href="{% url 'edit_blog' blog.id %}">Edit</a>
+                        <a class="btn btn-delete" href="{% url 'del_blog' blog.id %}">Delete</a>
+                        {% if blog.status == "pending" %}
+                        <a class="btn btn-approve" href="{% url 'approved_blog' blog.id %}">Approve</a>
+                        <a class="btn btn-reject" href="{% url 'reject_blog' blog.id %}">Reject</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- All Other Blogs -->
+    <h2>All Blogs</h2>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for blog in blogs %}
+                {% if blog.author != request.user %}
+                <tr>
+                    <td>{{ blog.id }}</td>
+                    <td>{{ blog.title }}</td>
+                    <td>{{ blog.author.username }}</td>
+                    <td>
+                        <span class="status {{ blog.status }}">{{ blog.status|title }}</span>
+                    </td>
+                    <td>
+                        {% if blog.status == "pending" %}
+                            <a class="btn btn-approve" href="{% url 'approved_blog' blog.id %}">Approve</a>
+                            <a class="btn btn-reject" href="{% url 'reject_blog' blog.id %}">Reject</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

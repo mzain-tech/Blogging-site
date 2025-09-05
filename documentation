@@ -1,0 +1,58 @@
+🔥 Project Name: Multi-User Blogging Platform with Admin & User Dashboards
+📌 Features:
+🔐 Authentication System:
+Register / Login / Logout
+Email, First Name, Last Name, Username, Password + Confirm Password
+Login Required Decorator
+Different dashboards for normal users and admin
+
+📝 Blog Post Functionality:
+User can create, edit, delete their own blog posts
+Title, content, tags, image upload, post date
+Rich Text Editor for writing (CKEditor integration)
+Slug URL (e.g. /post/my-first-blog/)
+
+📄 Public Blog Listing:
+Homepage: All published blogs
+Search bar (title / tags)
+Filter by author or tag
+Pagination (next / previous pages)
+
+🧑‍💻 User Dashboard:
+See their own posts only
+Button: Edit / Delete Post
+Create new post
+Profile Update
+
+🛠️ Admin Dashboard:
+Admin can see all users
+Admin can block/unblock any user
+Admin can approve/reject blogs before publishing
+Show count: total users, total blogs, published/pending blogs
+
+💬 Comments System (Bonus):
+Anyone logged in can comment on blog posts
+Admin/moderator can delete inappropriate comments
+
+📊 Analytics (Optional Advanced):
+Show views count per blog
+Show top 5 most viewed posts
+Charts using Chart.js or similar
+
+🔧 Tools to Use:
+Django
+SQLite or PostgreSQL
+CKEditor (for rich blog writing)
+Bootstrap/Tailwind (for styling)
+Django Admin (for backend superuser)
+Media files for image upload
+
+✅ Skills You Will Practice:
+Django Models, Views, Forms
+Authentication and User Access
+CRUD Operations
+Template Inheritance
+URL routing
+Messages framework
+File Uploads
+Admin customization

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}User Dashboard{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
+{% endblock %}
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome, {{ request.user.username }} 👋</h1>
+    
+    <div class="top-links">
+        <a href="{% url 'update_profile' %}" class="btn">Update Profile</a>
+        <a href="{% url 'add_blog' %}" class="btn add-blog">+ Add New Blog</a>
+    </div>
+
+    <div class="blog-list">
+        {% for post in posts %}
+            <div class="blog-card">
+                <h2>{{ post.title }}</h2>
+                <p class="content">{{ post.content|truncatewords:30 }}</p>
+                
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Post Image">
+                {% endif %}
+
+                <div class="tags">
+                    {% for tag in post.tags.all %}
+                        <span class="tag">{{ tag }}</span>
+                    {% empty %}
+                        <span class="tag">No Tags</span>
+                    {% endfor %}
+                </div>
+
+                <p class="meta">
+                    ✍️ {{ post.author }} | 📅 {{ post.post_date }}
+                </p>
+
+                <div class="actions">
+                    <a href="{% url 'edit_blog' post.id %}" class="edit">Edit</a>
+                    <a href="{% url 'del_blog' post.id %}" class="delete">Delete</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-posts">No blogs created yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

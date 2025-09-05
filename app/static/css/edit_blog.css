@@ -1,0 +1,237 @@
+/* Edit Blog Page Styles */
+.edit-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 80vh;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+}
+
+.edit-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    width: 100%;
+    max-width: 800px;
+    animation: slideUp 0.5s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.edit-title {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.edit-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #3498db, #2ecc71);
+    border-radius: 2px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.edit-form label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 1.1rem;
+}
+
+.edit-form input[type="text"],
+.edit-form textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 2px solid #e6e9ed;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.edit-form input[type="text"]:focus,
+.edit-form textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    background-color: white;
+}
+
+.edit-form textarea {
+    min-height: 250px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* File input styling */
+.edit-form input[type="file"] {
+    width: 100%;
+    padding: 1rem;
+    border: 2px dashed #bdc3c7;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.edit-form input[type="file"]:hover {
+    border-color: #3498db;
+    background-color: #edf7fd;
+}
+
+.edit-form input[type="file"]::file-selector-button {
+    padding: 0.6rem 1.2rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 1rem;
+    transition: background 0.3s ease;
+}
+
+.edit-form input[type="file"]::file-selector-button:hover {
+    background: #2980b9;
+}
+
+/* Form actions */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.edit-btn {
+    background: linear-gradient(to right, #2ecc71, #27ae60);
+    color: white;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.edit-btn:hover {
+    background: linear-gradient(to right, #27ae60, #219653);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(46, 204, 113, 0.4);
+}
+
+.cancel-btn {
+    background: linear-gradient(to right, #95a5a6, #7f8c8d);
+    color: white;
+    box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+}
+
+.cancel-btn:hover {
+    background: linear-gradient(to right, #7f8c8d, #6c7a7b);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(149, 165, 166, 0.4);
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .edit-container {
+        padding: 1.5rem;
+    }
+    
+    .edit-card {
+        padding: 2.5rem 2rem;
+    }
+    
+    .edit-title {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .edit-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .edit-title {
+        font-size: 1.7rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .edit-container {
+        padding: 1rem;
+    }
+    
+    .edit-card {
+        padding: 1.5rem 1.2rem;
+    }
+    
+    .edit-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .edit-form {
+        gap: 1.2rem;
+    }
+    
+    .btn {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+}
